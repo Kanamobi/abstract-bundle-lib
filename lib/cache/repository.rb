@@ -17,7 +17,15 @@ module Cache
     end
 
     def set(object)
+      ttl? ? set_without_ttl(object) : set_ttl(object)
+    end
+    
+    def set_ttl(object)
       !!repo.setex(generate_key(object.send(key)), ttl, object.serialized_to_cache)
+    end
+    
+    def set_without_ttl(object)
+      !!repo.set(generate_key(object.send(key), object.serialized_to_cache)
     end
 
     def exists?(value)
@@ -25,11 +33,15 @@ module Cache
     end
 
     private
+    
+    def ttl?
+      ttl.blank? || ttl.zero?
+    end
 
     def set_repo(params)
       param = config.schema
       param.merge(params) unless params.blank? || params.empty?
-      @repo = Redis.new(param) 
+      @repo = Redis.new(param)
     end
 
     def config
