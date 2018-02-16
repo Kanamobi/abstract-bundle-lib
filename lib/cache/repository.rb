@@ -17,7 +17,7 @@ module Cache
     end
 
     def set(object)
-      ttl? ? set_ttl(object) : set_without_ttl(object)
+      ttl? ? set_without_ttl(object) : set_ttl(object)
     end
     
     def set_ttl(object)
