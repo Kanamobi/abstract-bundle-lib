@@ -17,6 +17,7 @@ require "cache/cacheable"
 require "cache/configuration"
 require "cache/repository"
 require "cache/struct_helper"
+require "cache/application_key"
 require "cache/user"
 
 # concern
