@@ -17,7 +17,12 @@ module Cache
     end
 
     def set(object)
-      !!repo.setex(generate_key(object.send(key)), ttl, object.serialized_to_cache)
+      params = []
+      params << generate_key(object.send(key))
+      params << ttl if ttl?
+      params << object.serialized_to_cache
+      meth = ttl? ? :setex : :set
+      !!repo.send(meth, *params)
     end
 
     def exists?(value)
@@ -26,10 +31,14 @@ module Cache
 
     private
 
+    def ttl?
+      unless ttl.nil? or ttl.zero?
+    end
+
     def set_repo(params)
       param = config.schema
       param.merge(params) unless params.blank? || params.empty?
-      @repo = Redis.new(param) 
+      @repo = Redis.new(param)
     end
 
     def config
