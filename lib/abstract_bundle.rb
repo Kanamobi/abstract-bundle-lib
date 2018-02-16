@@ -22,6 +22,7 @@ require "cache/user"
 
 # concern
 require "concerns"
+require "authentication"
 
 # errors
 
