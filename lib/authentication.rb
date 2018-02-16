@@ -1,6 +1,6 @@
 module Authentication
   # Authentication module contains all business class to manage the application authentication
-  class Applicatation 
+  class Authorization
     include Exceptional
 
     delegate 'from_cache', 'cached?', to: Cache::ApplicationKey
