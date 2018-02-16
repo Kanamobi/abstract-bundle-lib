@@ -34,8 +34,8 @@ module Cache
     module ClassMethods
       attr_reader :repository
 
-      included do
-        delegate 'parse', to: JSON
+      def parse(value)
+        Json.parse(value)
       end
 
       def from_cache(id)
