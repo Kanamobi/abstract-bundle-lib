@@ -35,7 +35,7 @@ module Cache
       attr_reader :repository
 
       def parse(value)
-        Json.parse(value)
+        JSON.parse(value)
       end
 
       def from_cache(id)
