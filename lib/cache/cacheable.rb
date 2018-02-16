@@ -5,6 +5,7 @@ module Cache
 
     included do
       delegate 'dump', to: Marshal
+      delegate 'build_struct', to: Cache::StructHelper
     end
 
     def cache!
@@ -17,9 +18,30 @@ module Cache
       self.class.serializable? ? serialized.to_json : dump(self)
     end
 
+    private
+
+    def set_params(params)
+      params.each do |key, value|
+        value.is_a?(Hash) ? set_attr(key, build_struct(value)) : set_attr(key, value)
+      end
+    end
+
+    def set_attr(attr, value)
+      send("#{attr}=", value)
+    end
+
     # class methods
     module ClassMethods
       attr_reader :repository
+
+      included do
+        delegate 'parse', to: JSON
+      end
+
+      def from_cache(id)
+        raise_not_in_cache unless cached?(id)
+        new(parse(get(id))) 
+      end
 
       def serializable?
         ancestors.include?(Serializable)
