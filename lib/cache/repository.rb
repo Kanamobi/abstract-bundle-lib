@@ -17,12 +17,15 @@ module Cache
     end
 
     def set(object)
-      params = []
-      params << generate_key(object.send(key))
-      params << ttl if ttl?
-      params << object.serialized_to_cache
-      meth = ttl? ? :setex : :set
-      !!repo.send(meth, *params)
+      ttl? ? set_ttl(object) : set_without_ttl(object)
+    end
+    
+    def set_ttl(object)
+      !!repo.setex(generate_key(object.send(key)), ttl, object.serialized_to_cache)
+    end
+    
+    def set_without_ttl(object)
+      !!repo.set(generate_key(object.send(key), object.serialized_to_cache)
     end
 
     def exists?(value)
@@ -30,9 +33,9 @@ module Cache
     end
 
     private
-
+    
     def ttl?
-      unless ttl.nil? or ttl.zero?
+      ttl.blank? || ttl.zero?
     end
 
     def set_repo(params)
