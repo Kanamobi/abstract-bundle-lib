@@ -12,6 +12,7 @@ module Authentication
     end
 
     def authenticate
+      check
       decode
       authorize
       app_key
@@ -35,9 +36,5 @@ module Authentication
     def raise_unauthorized
       self.class.raise_simple(:auth, 'exceptions.unauthorized')
     end
-  end
-end
-
-    
   end
 end
