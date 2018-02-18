@@ -25,7 +25,7 @@ module Cache
     end
     
     def set_without_ttl(object)
-      !!repo.set(generate_key(object.send(key), object.serialized_to_cache)
+      !!repo.set(generate_key(object.send(key)), object.serialized_to_cache)
     end
 
     def exists?(value)
