@@ -13,5 +13,9 @@ module Cache
       set_params(params)
     end
 
+    def hash
+      "#{uuid}:#{key}"
+    end
+
   end
 end

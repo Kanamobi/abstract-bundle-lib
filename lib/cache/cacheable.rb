@@ -1,4 +1,4 @@
-module Cache 
+module Cache
   # module to cache on redis
   module Cacheable
     extend ActiveSupport::Concern
@@ -27,7 +27,7 @@ module Cache
     end
 
     def set_attr(attr, value)
-      send("#{attr}=", value)
+      send("#{attr}=", value) if respond_to?("#{attr}=")
     end
 
     # class methods
@@ -40,7 +40,7 @@ module Cache
 
       def from_cache(id)
         raise_not_in_cache unless cached?(id)
-        new(parse(get(id))) 
+        new(parse(get(id)))
       end
 
       def serializable?
