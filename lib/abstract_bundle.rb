@@ -1,4 +1,5 @@
 # dependencies
+require "figaro"
 require "redis"
 require "active_support"
 require "active_support/inflector"
@@ -24,8 +25,8 @@ require "cache/user"
 require "concerns"
 require "authentication"
 
+Figaro.load
 # errors
-
 module AbstractBundle
   # standard error for methods not implementeds
   class NotImplementedError < NoMethodError
