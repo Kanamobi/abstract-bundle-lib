@@ -25,7 +25,6 @@ require "cache/user"
 require "concerns"
 require "authentication"
 
-Figaro.load
 # errors
 module AbstractBundle
   # standard error for methods not implementeds
