@@ -1,3 +1,3 @@
 module AbstractBundle
-  VERSION = "0.1.16.15"
+  VERSION = "0.1.16.16"
 end
