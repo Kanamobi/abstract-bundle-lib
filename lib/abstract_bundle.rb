@@ -21,7 +21,6 @@ require "cache/struct_helper"
 
 # concern
 require "concerns"
-require "authentication"
 
 # errors
 module AbstractBundle
