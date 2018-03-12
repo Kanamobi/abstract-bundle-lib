@@ -50,7 +50,7 @@ module Buildable
     end
 
     def exec_commit(object)
-      object.valid? && object.save
+      object.save if object.valid?
     end
 
   end
