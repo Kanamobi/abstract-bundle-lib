@@ -19,6 +19,10 @@ require "cache/configuration"
 require "cache/repository"
 require "cache/struct_helper"
 
+# search
+require "search/base"
+require "search/serializer"
+
 # concern
 require "concerns"
 
