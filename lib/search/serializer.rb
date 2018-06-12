@@ -2,7 +2,7 @@ module Search
   class Serializer
     include ::AbstractBundle::Interface
 
-    needs_implmentation :from_cache, :exists?
+    needs_implementation :from_cache, :exists?
 
     attr_reader :object, :user_id, :serialized
 
