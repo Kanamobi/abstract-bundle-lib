@@ -20,6 +20,14 @@ module Cache
       ttl? ? set_without_ttl(object) : set_ttl(object)
     end
 
+    def del(key)
+      repo.del("#{prefix}-#{key}")
+    end
+
+    def where(search)
+      repo.keys("#{prefix}-#{search}")
+    end
+
     def set_ttl(object)
       !!repo.setex(generate_key(object.send(key)), ttl, object.serialized_to_cache)
     end

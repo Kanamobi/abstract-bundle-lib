@@ -43,6 +43,10 @@ module Cache
         new(parse(get(id)))
       end
 
+      def where_from_cache(search)
+        where(search).map { |id| from_cache(id) }
+      end
+
       def serializable?
         ancestors.include?(Serializable)
       end
@@ -57,6 +61,14 @@ module Cache
 
       def set(object)
         repository.set(object)
+      end
+
+      def del(value)
+        repository.del(value)
+      end
+
+      def where(search)
+        repository.where(search)
       end
 
       def raise_not_in_cache
