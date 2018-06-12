@@ -1,6 +1,6 @@
 module Search
   class Serializer
-    include AbstractBundle::Interface
+    include ::AbstractBundle::Interface
 
     needs_implmentation :from_cache, :exists?
 

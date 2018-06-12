@@ -1,7 +1,7 @@
 module Search
   # Base search class with basic methods
   class Base
-    include AbstractBundle::Interface
+    include ::AbstractBundle::Interface
 
     attr_reader 'results', 'params', 'query', 'search_params', 'page', 'user_id','per_page'
 
