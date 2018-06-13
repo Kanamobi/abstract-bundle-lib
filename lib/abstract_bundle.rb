@@ -22,6 +22,7 @@ require "cache/struct_helper"
 # search
 require "search/base"
 require "search/serializer"
+require "search/pagination"
 
 # concern
 require "concerns"
