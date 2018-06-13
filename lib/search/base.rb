@@ -35,6 +35,10 @@ module Search
       list.each { |attr| search_params[:where][attr] = params[attr] if params.key?(attr) }
     end
 
+    def add_or_condition(attr, condition)
+      search_params[:where][:_or] << {attr => condition} if params.key?(attr)
+    end
+
     def add_with_keys(where_key, param_key)
       search_params[:where][where_key] = params[param_key] if params.key?(param_key)
     end
