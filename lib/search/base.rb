@@ -18,7 +18,7 @@ module Search
     end
 
     def setup_params
-      @query = params.fetch(:query).blank? ? '*' : params[:query]
+      @query = params[:query].blank? ? '*' : params.fetch(:query)
     end
 
     def serialize_with_favorite(results, serializer: Search::Serializer)
