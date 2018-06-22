@@ -21,11 +21,11 @@ module Cache
     end
 
     def del(key)
-      repo.del("#{prefix}-#{key}")
+      repo.del(prefix_key)
     end
 
     def where(search)
-      repo.keys("#{prefix}-#{search}")
+      repo.keys("#{prefix}-#{search}").map {|key| key.gsub(/#{prefix_key}\-/, '')}
     end
 
     def set_ttl(object)
@@ -38,6 +38,10 @@ module Cache
 
     def exists?(value)
       repo.exists(generate_key(value))
+    end
+
+    def prefix_key
+      "#{prefix}-#{key}"
     end
 
     private
