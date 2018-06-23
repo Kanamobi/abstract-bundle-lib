@@ -10,7 +10,7 @@ module Search
       @object = object
       @user_id = user_id
       @serialized = @object.serialized
-      serialized
+      serialize
     end
 
     def serialize
@@ -18,15 +18,13 @@ module Search
       serialized['favorite_id'] = from_cache(favorite_key).favorite_id if is_favorited
       serialized['favorited'] = is_favorited
     end
-    
+
     def favorite_key
       "#{user_id}|#{object.id.to_s}"
     end
-    
+
     def favorited?
       exists?(favorite_key)
     end
-
-
   end
 end

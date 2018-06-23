@@ -25,7 +25,7 @@ module Search
       results.map { |object| serializer.new(user_id, object).serialized }
     end
 
-    private 
+    private
 
     def has_near_params
       params.key?(:lat) && params.key?(:lon) && params.key?(:range)

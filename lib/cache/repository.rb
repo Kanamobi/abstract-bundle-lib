@@ -25,7 +25,7 @@ module Cache
     end
 
     def where(search)
-      repo.keys("#{prefix}-#{search}").map {|key| key.gsub(/#{prefix_key}\-/, '')}
+      repo.keys("#{prefix}-#{search}").map {|key| key.gsub(/#{prefix}\-/, '')}
     end
 
     def set_ttl(object)
