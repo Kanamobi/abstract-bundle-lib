@@ -21,7 +21,7 @@ module Cache
     end
 
     def del(key)
-      repo.del(prefix_key)
+      repo.del(prefix_key(key))
     end
 
     def where(search)
@@ -40,7 +40,7 @@ module Cache
       repo.exists(generate_key(value))
     end
 
-    def prefix_key
+    def prefix_key(key)
       "#{prefix}-#{key}"
     end
 
