@@ -44,7 +44,7 @@ module Cache
       end
 
       def where_from_cache(search)
-        where(search).map { |id| from_cache(id) }
+        cached_where(search).map { |id| from_cache(id) }
       end
 
       def serializable?
@@ -67,7 +67,7 @@ module Cache
         repository.del(value)
       end
 
-      def where(search)
+      def cached_where(search)
         repository.where(search)
       end
 
