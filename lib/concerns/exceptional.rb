@@ -25,6 +25,10 @@ module Exceptional
     raise Exceptions::Model.build(self)
   end
 
+  def raise_on_error
+    raise Exceptions::Model.build(self) if errors.any?
+  end
+
   # Module Exceptional creates and raise errors
   module ClassMethods
     def raise_simple(field, translation)
