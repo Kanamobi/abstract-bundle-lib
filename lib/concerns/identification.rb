@@ -42,7 +42,8 @@ module Identification
   end
 
   # setup a new password and save
-  def change_password(params)
+  def change_password(params, confirmation = false)
+    authenticate(params[:old_password]) if confirmation
     self.password = params[:password]
     self.class.raise_model(:password, 'errors.messages.blank') if password.blank?
     save
