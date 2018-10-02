@@ -16,7 +16,7 @@ module Identification
       @password = ''
       self.password_hash = ''
     else
-      validate_password_regex
+      validate_password_regex(new_password)
       @password = Password.create(new_password)
       self.password_hash = @password
     end
