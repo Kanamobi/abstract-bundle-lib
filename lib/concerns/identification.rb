@@ -29,7 +29,7 @@ module Identification
 
   def validate_password_regex(password)
     unless password_regex.blank?
-      add_error(:password, 'errors.messages.invalid_format') if (password_regex =~ password).blank?
+      add_error!(:password, 'errors.messages.invalid') if (password_regex =~ password).blank?
     end
   end
 
