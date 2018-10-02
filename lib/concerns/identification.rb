@@ -16,6 +16,7 @@ module Identification
       @password = ''
       self.password_hash = ''
     else
+      validate_password_regex
       @password = Password.create(new_password)
       self.password_hash = @password
     end
@@ -24,6 +25,16 @@ module Identification
   # validates the presence of password for an authenticatable
   def password_presence
     add_error(:password, 'errors.messages.blank') if password.blank?
+  end
+
+  def validate_password_regex(password)
+    unless password_regex.blank?
+      add_error(:password, 'errors.messages.invalid_format') if (password_regex =~ password).blank?
+    end
+  end
+
+  def password_regex
+    self.class.password_regex
   end
 
   def generate_temporary_password
@@ -47,5 +58,13 @@ module Identification
     self.password = params[:password]
     self.class.raise_model(:password, 'errors.messages.blank') if password.blank?
     save
+  end
+
+  module ClassMethods
+    attr_reader :password_regex
+
+    def set_password_regex(regex)
+      @password_regex = regex
+    end
   end
 end
