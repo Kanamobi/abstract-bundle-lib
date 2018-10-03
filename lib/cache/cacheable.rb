@@ -19,7 +19,7 @@ module Cache
     end
 
     def marshaled?
-      ancestors.map(&:name).include?("ActiveRecord::Base") || !self.class.serializable?
+      self.class.marshaled? || !self.class.serializable?
     end
 
     private
@@ -38,13 +38,17 @@ module Cache
     module ClassMethods
       attr_reader :repository
 
+      def marshaled?
+        ancestors.map(&:name).include?("ActiveRecord::Base")
+      end
+
       def parse(value)
         JSON.parse(value)
       end
 
       def from_cache(id)
         raise_not_in_cache unless cached?(id)
-        new(parse(get(id)))
+        marshaled? ?  Marshal.load(get(id)) : new(parse(get(id)))
       end
 
       def where_from_cache(search)
