@@ -15,7 +15,11 @@ module Cache
     end
 
     def serialized_to_cache
-      self.class.serializable? ? serialized.to_json : dump(self)
+      marshaled? ? dump(self) : serialized.to_json
+    end
+
+    def marshaled?
+      ancestors.map(&:name).include?("ActiveRecord::Base") || !self.class.serializable?
     end
 
     private
