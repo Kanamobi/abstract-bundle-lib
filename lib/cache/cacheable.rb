@@ -38,9 +38,9 @@ module Cache
     module ClassMethods
       attr_reader :repository
 
-      # def marshaled?
-      #   ancestors.map(&:name).include?("ActiveRecord::Base")
-      # end
+      def marshaled?
+        repository.marshaled?
+      end
 
       def parse(value)
         JSON.parse(value)

@@ -45,6 +45,10 @@ module Cache
       "#{prefix}-#{key}"
     end
 
+    def marshaled?
+      marshaled
+    end
+
     private
 
     def ttl?
