@@ -3,12 +3,13 @@ module Cache
     delegate 'config', to: Cache
     delegate 'dump', to: Marshal
 
-    attr_reader :repo, :prefix, :key, :ttl
+    attr_reader :repo, :prefix, :key, :ttl, :marshaled
 
     def initialize(prefix, params = {})
-      @prefix = params.key?(:prefix) ? params[:prefix] : prefix
-      @key    = params.key?(:key)    ? params[:key]    : config.key
-      @ttl    = params.key?(:ttl)    ? params[:ttl]    : config.ttl
+      @prefix     = params.key?(:prefix)    ? params[:prefix] : prefix
+      @key        = params.key?(:key)       ? params[:key]    : config.key
+      @ttl        = params.key?(:ttl)       ? params[:ttl]    : config.ttl
+      @marshaled  = params.key?(:marshaled) ? params[:ttl]    : false
       set_repo(params[:schema])
     end
 
