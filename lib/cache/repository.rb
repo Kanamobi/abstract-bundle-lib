@@ -6,10 +6,10 @@ module Cache
     attr_reader :repo, :prefix, :key, :ttl, :marshaled
 
     def initialize(prefix, params = {})
-      @prefix     = params.key?(:prefix)    ? params[:prefix] : prefix
-      @key        = params.key?(:key)       ? params[:key]    : config.key
-      @ttl        = params.key?(:ttl)       ? params[:ttl]    : config.ttl
-      @marshaled  = params.key?(:marshaled) ? params[:ttl]    : false
+      @prefix     = params.key?(:prefix)    ? params[:prefix]    : prefix
+      @key        = params.key?(:key)       ? params[:key]       : config.key
+      @ttl        = params.key?(:ttl)       ? params[:ttl]       : config.ttl
+      @marshaled  = params.key?(:marshaled) ? params[:marshaled] : false
       set_repo(params[:schema])
     end
 
