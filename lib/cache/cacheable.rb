@@ -44,7 +44,7 @@ module Cache
       end
 
       def from_cache_serialized(id)
-        parse(get(id))
+        parse(get(id)).with_indifferent_access
       end
 
       def where_from_cache(search)
