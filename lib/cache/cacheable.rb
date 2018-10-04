@@ -40,10 +40,10 @@ module Cache
 
       def from_cache(id)
         raise_not_in_cache unless cached?(id)
-        new(from_cache_serilized(id))
+        new(from_cache_serialized(id))
       end
 
-      def from_cache_serilized(id)
+      def from_cache_serialized(id)
         parse(get(id))
       end
 
