@@ -15,11 +15,7 @@ module Cache
     end
 
     def serialized_to_cache
-      marshaled? ? dump(self) : serialized.to_json
-    end
-
-    def marshaled?
-      self.class.marshaled? || !self.class.serializable?
+      self.class.serializable? ? serialized.to_json : dump(self)
     end
 
     private
@@ -38,17 +34,17 @@ module Cache
     module ClassMethods
       attr_reader :repository
 
-      def marshaled?
-        repository.marshaled?
-      end
-
       def parse(value)
         JSON.parse(value)
       end
 
       def from_cache(id)
         raise_not_in_cache unless cached?(id)
-        marshaled? ?  Marshal.load(get(id)) : new(parse(get(id)))
+        new(from_cache_serilized)
+      end
+
+      def from_cache_serilized
+        parse(get(id))
       end
 
       def where_from_cache(search)
